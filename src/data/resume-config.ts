@@ -131,7 +131,7 @@ export const resumeConfig: ResumeConfig = {
         },
         tasks: {
           en: [
-            'Designed a two-layer Azure landing zone (platform + application) with reusable Terraform modules (network, compute, data, AI, messaging, monitoring) and remote state',
+            'Designed an Azure landing zone (networking, identity, governance) carrying a modular application layer, with reusable Terraform modules (network, compute, data, AI, messaging, monitoring) and remote state',
             'Built a secretless CI/CD pipeline with GitHub Actions and OIDC federated credentials — zero stored cloud credentials, terraform plan on every PR, apply on merge',
             'Developed a Python multi-agent pipeline (offer-fetching, cv-analysis, matching, cv-review, cleanup) orchestrated via Azure Service Bus and Container App Jobs, using pgvector (cosine similarity) and Azure OpenAI (GPT-4o-mini + text-embedding-3-small) for semantic matching and scoring',
             'Built a FastAPI backend (JWT auth via Microsoft Entra External ID) and a Next.js 14 frontend, secured end-to-end with private networking (VNet, private endpoints/DNS), Key Vault, least-privilege RBAC and managed/workload identity',
@@ -139,7 +139,7 @@ export const resumeConfig: ResumeConfig = {
             'Orchestrated an AI-assisted development workflow: up to 4 Claude Code agents running in parallel for implementation, Claude for architecture and planning discussions, and an autonomous Claude-based reviewer agent integrated into CI/CD for automatic code review on every PR',
           ],
           fr: [
-            'Conception d\'une landing zone Azure à deux couches (plateforme + application) avec des modules Terraform réutilisables (réseau, compute, data, IA, messagerie, monitoring) et un state distant',
+            'Conception d\'une landing zone Azure (réseau, identité, gouvernance) portant une couche applicative modulaire, avec des modules Terraform réutilisables (réseau, compute, data, IA, messagerie, monitoring) et un state distant',
             'Mise en place d\'une CI/CD sans secret avec GitHub Actions et des identités fédérées OIDC — aucune credential cloud stockée, terraform plan à chaque PR, apply au merge',
             'Développement d\'un pipeline multi-agents Python (collecte d\'offres, analyse de CV, matching, revue de CV, nettoyage) orchestré via Azure Service Bus et des Container App Jobs, avec pgvector (similarité cosinus) et Azure OpenAI (GPT-4o-mini + text-embedding-3-small) pour le matching sémantique et le scoring',
             'Développement d\'un backend FastAPI (authentification JWT via Microsoft Entra External ID) et d\'un frontend Next.js 14, sécurisés de bout en bout : VNet avec endpoints/DNS privés, Key Vault, RBAC au moindre privilège, identité managée/workload',

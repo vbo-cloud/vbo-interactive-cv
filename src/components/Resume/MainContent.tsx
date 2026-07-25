@@ -23,7 +23,6 @@ export function MainContent() {
     mainTasks: resolve(labels.experience.mainTasks),
     moreTasks: resolve(labels.experience.moreTasks),
     training: labels.experience.training ? resolve(labels.experience.training) : undefined,
-    techEnv: resolve(labels.experience.techEnv),
     technologies: resolve(labels.experience.technologies),
   }
 
@@ -88,10 +87,8 @@ export function MainContent() {
               details={
                 exp.details
                   ? {
-                      context: resolve(exp.details.context),
                       tasks: exp.details.tasks ? resolveArray(exp.details.tasks) : undefined,
                       training: exp.details.training ? resolveArray(exp.details.training) : undefined,
-                      env: resolve(exp.details.env),
                     }
                   : undefined
               }
@@ -105,7 +102,6 @@ export function MainContent() {
               }
               labels={experienceLabels}
               isHighlighted={exp.isHighlighted}
-              expandDescription={exp.expandDescription}
             />
           ))}
         </div>

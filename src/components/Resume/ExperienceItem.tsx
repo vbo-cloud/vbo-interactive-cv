@@ -17,21 +17,17 @@ interface ExperienceItemProps {
   expanded: boolean
   onToggle: () => void
   details?: {
-    context: string
     tasks?: string[]
     training?: string[]
-    env: string
   }
   subItem?: { title: string; description: string }
   labels: {
     mainTasks: string
     moreTasks: string
     training?: string
-    techEnv: string
     technologies: string
   }
   isHighlighted?: boolean
-  expandDescription?: boolean
 }
 
 export function ExperienceItem({
@@ -47,7 +43,6 @@ export function ExperienceItem({
   subItem,
   labels,
   isHighlighted = false,
-  expandDescription = false,
 }: ExperienceItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { isDesktop } = useBreakpoints()
@@ -103,7 +98,7 @@ export function ExperienceItem({
               )}
             </div>
             <p className="text-xs text-resume-text-secondary mt-0.5">{role}</p>
-            <p className={cn('text-xs text-resume-text-secondary/80 mt-1', expandDescription ? 'line-clamp-4' : 'line-clamp-2')}>{description}</p>
+            <p className="text-xs text-resume-text-secondary/80 mt-1 line-clamp-4">{description}</p>
 
             <div className="flex flex-wrap gap-1.5 mt-2">
               {techs.map((tech) => (
@@ -132,10 +127,8 @@ export function ExperienceItem({
             >
               <div className="ml-24 mt-2 mb-4 p-4 bg-resume-bg rounded-lg border border-resume-primary/20">
                 <ExperienceDetailsContent
-                  context={details.context}
                   tasks={details.tasks}
                   training={details.training}
-                  env={details.env}
                   labels={labels}
                   variant="inline"
                 />
@@ -158,12 +151,9 @@ export function ExperienceItem({
           }
         >
           <ExperienceDetailsContent
-            context={details.context}
             tasks={details.tasks}
             training={details.training}
-            env={details.env}
             techs={techs}
-            description={description}
             labels={labels}
             variant="modal"
           />

@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import type { ResumeConfig } from '../src/data/types'
 import { presets } from '../src/data/presets'
-import { getTechColor } from '../src/data/tech-registry'
+import { getTechColor, getTechTier } from '../src/data/tech-registry'
 
 export function escapeHtml(str: string): string {
   return str
@@ -39,12 +39,76 @@ function reverseDateRange(period: string): string {
   return parts.length === 2 ? `${parts[1]} - ${parts[0]}` : period
 }
 
+/**
+ * Relative luminance (WCAG 2.0), mirrors src/components/Resume/TechBadge.tsx.
+ * Duplicated locally: this script runs under `tsx` without the `@/` alias, and only
+ * needs the light-mode branch (the PDF/noscript body is always rendered on white).
+ */
+function getLuminance(hex: string): number {
+  const r = parseInt(hex.slice(1, 3), 16) / 255
+  const g = parseInt(hex.slice(3, 5), 16) / 255
+  const b = parseInt(hex.slice(5, 7), 16) / 255
+  const toLinear = (c: number) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)
+  return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b)
+}
+
+function mixColors(a: string, b: string, t: number): string {
+  const channel = (hex: string, i: number) => parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16)
+  const mixed = [0, 1, 2].map((i) => Math.round(channel(a, i) + (channel(b, i) - channel(a, i)) * t))
+  return `#${mixed.map((c) => c.toString(16).padStart(2, '0')).join('')}`
+}
+
+function darkenColor(hex: string, amount: number): string {
+  const channel = (i: number) => parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16)
+  const darkened = [0, 1, 2].map((i) => Math.round(channel(i) * (1 - amount)))
+  return `#${darkened.map((c) => c.toString(16).padStart(2, '0')).join('')}`
+}
+
+/** Mirrors TechBadge.tsx's `ensureLightModeReadable` — same 0.14 target, same reasoning. */
+function ensureLightModeReadable(hex: string): string {
+  let color = hex
+  let luminance = getLuminance(color)
+  let step = 0
+  while (luminance > 0.14 && step < 10) {
+    color = darkenColor(color, 0.2)
+    luminance = getLuminance(color)
+    step++
+  }
+  return color
+}
+
+const WORKFLOW_DARK_GRAY = '#374151' // TechBadge.tsx's light-theme `workflow` badge — dark gray, not black
+
+/** Light-mode-only counterpart to TechBadge.tsx's `resolveTierStyle` (the PDF/noscript body has no dark mode). */
 function renderTechBadges(techs: string[]): string {
   if (techs.length === 0) return ''
   const badges = techs
     .map((tech) => {
+      const tier = getTechTier(tech)
       const color = getTechColor(tech)
-      return `<span style="display: inline-block; margin: 0 0.35rem 0.35rem 0; padding: 0.15rem 0.55rem; border-radius: 4px; font-size: 0.8rem; font-weight: 500; background: ${color}1a; color: ${color};">${escapeHtml(tech)}</span>`
+      let background: string
+      let fg: string
+      let border: string
+
+      if (tier === 'workflow') {
+        background = WORKFLOW_DARK_GRAY
+        fg = '#e5e7eb'
+        border = 'rgba(255, 255, 255, 0.3)'
+      } else if (tier === 'support') {
+        fg = ensureLightModeReadable(mixColors(color, '#64748b', 0.7))
+        background = `${fg}1f`
+        border = 'transparent'
+      } else if (tier === 'muted') {
+        fg = '#4b5563' // darkened from the spec's #6b7280 to clear WCAG AA (4.5:1)
+        background = 'rgba(0, 0, 0, 0.045)'
+        border = 'transparent'
+      } else {
+        fg = ensureLightModeReadable(color)
+        background = `${color}20`
+        border = `${color}59`
+      }
+
+      return `<span style="display: inline-block; margin: 0 0.35rem 0.35rem 0; padding: 0.15rem 0.55rem; border-radius: 4px; font-size: 0.8rem; font-weight: 500; background: ${background}; color: ${fg}; border: 1px solid ${border};">${escapeHtml(tech)}</span>`
     })
     .join('')
   return `<div style="margin: 0.35rem 0;">${badges}</div>`

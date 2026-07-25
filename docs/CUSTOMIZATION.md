@@ -112,10 +112,8 @@ experiences: [
     techs: ['React', 'TypeScript'],
     isHighlighted: true,            // Visual emphasis (optional)
     details: {                      // Expandable content (optional)
-      context: { en: 'Team of 8...' },
       tasks: { en: ['Led architecture', 'Mentored juniors'] },
       training: { en: ['React Advanced'] },  // Optional
-      env: { en: 'React / TypeScript / AWS' },
     },
     subItem: {                      // Sub-entry (optional)
       title: { en: 'Side project' },

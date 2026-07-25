@@ -197,14 +197,11 @@ export const resumeConfig: ResumeConfig = {
       type: { fr: 'CDI' },
       period: { fr: '2022 - Présent' },
       description: {
-        fr: 'Direction du développement d\'une plateforme SaaS utilisée par 10k+ utilisateurs.',
+        fr: 'Direction du développement d\'une plateforme SaaS utilisée par 10k+ utilisateurs, au sein d\'une équipe de 8 développeurs (Agile/Scrum, sprints de 2 semaines).',
       },
       techs: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Docker', 'AWS'],
       isHighlighted: true,   // true pour l'expérience principale
       details: {             // Optionnel : contenu expandable
-        context: {
-          fr: 'Équipe de 8 développeurs, méthodologie Agile/Scrum avec sprints de 2 semaines.',
-        },
         tasks: {
           fr: [
             'Conception de l\'architecture frontend (monorepo, bibliothèque de composants)',
@@ -217,9 +214,6 @@ export const resumeConfig: ResumeConfig = {
             'Certification AWS Solutions Architect',
           ],
         },
-        env: {
-          fr: 'React / TypeScript / Node.js / PostgreSQL / Docker / AWS',
-        },
       },
     },
     {
@@ -229,22 +223,16 @@ export const resumeConfig: ResumeConfig = {
       type: { fr: 'CDI' },
       period: { fr: '2019 - 2022' },
       description: {
-        fr: 'Développement d\'applications web responsives pour divers clients.',
+        fr: 'Développement d\'applications web responsives pour divers clients, au sein d\'une agence digitale avec 20+ clients et une équipe de 12 développeurs.',
       },
       techs: ['React', 'Angular', 'TypeScript', 'SCSS'],
       details: {
-        context: {
-          fr: 'Agence digitale avec 20+ clients, équipe de 12 développeurs.',
-        },
         tasks: {
           fr: [
             'Développement de 15+ applications web clients',
             'Création d\'un design system partagé',
             'Optimisation des performances web (scores 90+ Core Web Vitals)',
           ],
-        },
-        env: {
-          fr: 'React / Angular / TypeScript / SCSS / Tailwind CSS / Storybook',
         },
       },
     },
@@ -318,7 +306,6 @@ export const resumeConfig: ResumeConfig = {
       mainTasks: { fr: 'Missions principales :' },
       moreTasks: { fr: 'autres missions...' },
       training: { fr: 'Formations :' },
-      techEnv: { fr: 'Env. technique :' },
       technologies: { fr: 'Technologies' },
     },
     actions: {

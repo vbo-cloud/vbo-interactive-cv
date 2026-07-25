@@ -125,16 +125,12 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Permanent', fr: 'CDI' },
       period: { en: '2022 - Present', fr: '2022 - Présent' },
       description: {
-        en: 'Led the development of a SaaS platform used by 10k+ users. Built microservices architecture and modern React frontend.',
-        fr: 'Direction du développement d\'une plateforme SaaS utilisée par 10k+ utilisateurs. Architecture microservices et frontend React moderne.',
+        en: 'Led the development of a SaaS platform used by 10k+ users, within a team of 8 developers (Agile/Scrum, 2-week sprints). Built microservices architecture and modern React frontend, with CI/CD via GitHub Actions and code reviews on every PR.',
+        fr: 'Direction du développement d\'une plateforme SaaS utilisée par 10k+ utilisateurs, au sein d\'une équipe de 8 développeurs (Agile/Scrum, sprints de 2 semaines). Architecture microservices et frontend React moderne, avec CI/CD via GitHub Actions et code review sur chaque PR.',
       },
       techs: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Docker', 'AWS'],
       isHighlighted: true,
       details: {
-        context: {
-          en: 'Team of 8 developers within a 50-person product company. Agile/Scrum methodology with 2-week sprints, CI/CD pipeline with GitHub Actions, code reviews on every PR.',
-          fr: 'Équipe de 8 développeurs au sein d\'une société produit de 50 personnes. Méthodologie Agile/Scrum avec sprints de 2 semaines, pipeline CI/CD avec GitHub Actions, code review sur chaque PR.',
-        },
         tasks: {
           en: [
             'Designed and implemented the frontend architecture (monorepo, shared component library)',
@@ -167,10 +163,6 @@ export const resumeConfig: ResumeConfig = {
             'Formation interne sur l\'orchestration Kubernetes',
           ],
         },
-        env: {
-          en: 'React / TypeScript / Node.js / PostgreSQL / GraphQL / Redis / Docker / AWS / GitHub Actions / Datadog',
-          fr: 'React / TypeScript / Node.js / PostgreSQL / GraphQL / Redis / Docker / AWS / GitHub Actions / Datadog',
-        },
       },
     },
     {
@@ -180,15 +172,11 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Permanent', fr: 'CDI' },
       period: { en: '2019 - 2022', fr: '2019 - 2022' },
       description: {
-        en: 'Developed responsive web applications for various clients. Specialized in React and Angular projects.',
-        fr: 'Développement d\'applications web responsives pour divers clients. Spécialisée en projets React et Angular.',
+        en: 'Developed responsive web applications for various clients at a digital agency with 20+ clients across retail, finance and healthcare. Team of 12 developers, specialized in React and Angular projects.',
+        fr: 'Développement d\'applications web responsives pour divers clients, au sein d\'une agence digitale avec 20+ clients dans le retail, la finance et la santé. Équipe de 12 développeurs, spécialisée en projets React et Angular.',
       },
       techs: ['React', 'Angular', 'TypeScript', 'SCSS'],
       details: {
-        context: {
-          en: 'Digital agency with 20+ clients across various industries (retail, finance, healthcare). Team of 12 developers, working on 3-4 projects simultaneously.',
-          fr: 'Agence digitale avec 20+ clients dans différents secteurs (retail, finance, santé). Équipe de 12 développeurs, travaillant sur 3-4 projets simultanément.',
-        },
         tasks: {
           en: [
             'Built 15+ client-facing web applications from scratch',
@@ -219,10 +207,6 @@ export const resumeConfig: ResumeConfig = {
             'Certification Accessibilité (WCAG 2.1)',
           ],
         },
-        env: {
-          en: 'React / Angular / TypeScript / SCSS / Tailwind CSS / Storybook / Figma / GitLab CI',
-          fr: 'React / Angular / TypeScript / SCSS / Tailwind CSS / Storybook / Figma / GitLab CI',
-        },
       },
     },
     {
@@ -232,15 +216,11 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Internship', fr: 'Stage' },
       period: { en: '2018 - 2019', fr: '2018 - 2019' },
       description: {
-        en: 'Contributed to the development of an e-commerce platform. Gained experience in fullstack development.',
-        fr: 'Contribution au développement d\'une plateforme e-commerce. Acquisition d\'expérience en développement fullstack.',
+        en: 'Contributed to the development of an e-commerce platform at an early-stage startup (seed round), small team of 5 developers, fast-paced environment with weekly releases. Gained experience in fullstack development.',
+        fr: 'Contribution au développement d\'une plateforme e-commerce dans une startup en phase de démarrage (seed round), petite équipe de 5 développeurs, environnement rapide avec des releases hebdomadaires. Acquisition d\'expérience en développement fullstack.',
       },
       techs: ['React', 'Node.js', 'MongoDB', 'Machine Learning'],
       details: {
-        context: {
-          en: 'Early-stage startup (seed round), small team of 5 developers building an e-commerce platform from the ground up. Fast-paced environment with weekly releases.',
-          fr: 'Startup en phase de démarrage (seed round), petite équipe de 5 développeurs construisant une plateforme e-commerce from scratch. Environnement rapide avec des releases hebdomadaires.',
-        },
         tasks: {
           en: [
             'Developed the product catalog with advanced filtering and search',
@@ -258,10 +238,6 @@ export const resumeConfig: ResumeConfig = {
             'Création d\'un tableau de bord admin pour la gestion des commandes et les analytics',
             'Rédaction de la documentation API avec Swagger/OpenAPI',
           ],
-        },
-        env: {
-          en: 'React / Node.js / Express / MongoDB / Stripe / JWT / Docker / Heroku',
-          fr: 'React / Node.js / Express / MongoDB / Stripe / JWT / Docker / Heroku',
         },
       },
     },
@@ -377,7 +353,6 @@ export const resumeConfig: ResumeConfig = {
       mainTasks: { en: 'Main tasks:', fr: 'Tâches principales :' },
       moreTasks: { en: 'more tasks...', fr: 'autres tâches...' },
       training: { en: 'Training:', fr: 'Formations :' },
-      techEnv: { en: 'Tech environment:', fr: 'Env. technique :' },
       technologies: { en: 'Technologies', fr: 'Technologies' },
     },
     actions: {

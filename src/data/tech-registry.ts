@@ -28,7 +28,7 @@ const TECH_REGISTRY = {
   // ===== Languages =====
   'TypeScript': { color: '#3178C6' },
   'JavaScript': { color: '#F7DF1E' },
-  'Python': { color: '#3776AB' },
+  'Python': { color: '#FFD43B' },
   'Java': { color: '#007396' },
   'Go': { color: '#00ADD8' },
   'Golang': { color: '#00ADD8' },
@@ -81,6 +81,7 @@ const TECH_REGISTRY = {
 
   // ===== Databases =====
   'PostgreSQL': { color: '#4169E1' },
+  'pgvector': { color: '#2F6F9F' },
   'MongoDB': { color: '#47A248' },
   'MySQL': { color: '#4479A1' },
   'Redis': { color: '#DC382D' },
@@ -106,6 +107,7 @@ const TECH_REGISTRY = {
   'Terraform': { color: '#7B42BC' },
   'GitHub Actions': { color: '#6D071A' },
   'GitLab CI': { color: '#FC6D26' },
+  'Azure DevOps': { color: '#374151' },
   'Jenkins': { color: '#D24939' },
   'Vercel': { color: '#000000' },
   'Netlify': { color: '#00C7B7' },
@@ -134,12 +136,12 @@ const TECH_REGISTRY = {
 
   // ===== Tools & Others =====
   'Git': { color: '#374151' },
-  'CI/CD': { color: '#000000' },
+  'CI/CD': { color: '#374151' },
   'Service Bus': { color: '#CA8A04' },
   'Claude': { color: '#DA7756' },
   'Agile Methods': { color: '#16A34A' },
-  'GitHub': { color: '#181717' },
-  'GitLab': { color: '#FC6D26' },
+  'GitHub': { color: '#374151' },
+  'GitLab': { color: '#374151' },
   'GraphQL': { color: '#E10098' },
   'REST': { color: '#009688' },
   'Prisma': { color: '#2D3748' },
@@ -200,4 +202,54 @@ export function getTechColor(name: string): string {
   if (registered) return registered.color
 
   return '#6b7280'
+}
+
+/**
+ * Badge color is not decorative — it encodes how much a tech should stand out on
+ * the CV, from "this is the pitch" down to "true but not the point". Any tech not
+ * explicitly classified below falls to `muted` on purpose: the default is discreet.
+ */
+export type TechTier = 'brand' | 'workflow' | 'support' | 'muted'
+
+/**
+ * Brand tier — the actual sales pitch for a DevOps / Cloud Engineer (Azure) role.
+ * Full brand color + outline: these are what should catch the eye first.
+ */
+const BRAND_TECHS = new Set([
+  'Azure',
+  'Terraform',
+  'Python',
+  'Service Bus',
+  'OpenAI',
+  'Claude',
+  'pgvector',
+  'Docker',
+  'Agile Methods',
+  // fr label for the same skill — the sidebar badge text isn't currently
+  // language-resolved for this entry (see Sidebar.tsx), but classify both
+  // so tiering stays correct if that gets fixed later.
+  'Méthodes Agiles',
+])
+
+/**
+ * Workflow tier — the versioning/CI-CD substrate. Read as one object rather than
+ * distinct tools: flat black background, one shared text color, no brand colors.
+ */
+const WORKFLOW_TECHS = new Set(['Git', 'CI/CD', 'GitHub', 'GitLab', 'Azure DevOps'])
+
+/**
+ * Support tier — genuinely used, but not the argument for hiring: real second-plan
+ * credibility. Desaturated so it reads as "also true" rather than competing with brand tier.
+ */
+const SUPPORT_TECHS = new Set(['FastAPI', 'PostgreSQL', 'C#'])
+
+/**
+ * Resolves the visual tier for a tech name. Anything not classified above is `muted`
+ * — historical or off-trajectory skills: visible and factual, never salient.
+ */
+export function getTechTier(name: string): TechTier {
+  if (BRAND_TECHS.has(name)) return 'brand'
+  if (WORKFLOW_TECHS.has(name)) return 'workflow'
+  if (SUPPORT_TECHS.has(name)) return 'support'
+  return 'muted'
 }

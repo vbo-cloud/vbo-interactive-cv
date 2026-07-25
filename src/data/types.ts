@@ -42,17 +42,13 @@ export interface Experience {
   description: LocalizedString
   techs: (TechName | (string & {}))[]
   isHighlighted?: boolean
-  /** Show up to 4 lines of the description before truncating, instead of the default 2 */
-  expandDescription?: boolean
   subItem?: {
     title: LocalizedString
     description: LocalizedString
   }
   details?: {
-    context: LocalizedString
     tasks?: LocalizedStringArray
     training?: LocalizedStringArray
-    env: LocalizedString
   }
 }
 
@@ -133,7 +129,6 @@ export interface ResumeLabels {
     mainTasks: LocalizedString
     moreTasks: LocalizedString
     training?: LocalizedString
-    techEnv: LocalizedString
     technologies: LocalizedString
   }
   actions: {

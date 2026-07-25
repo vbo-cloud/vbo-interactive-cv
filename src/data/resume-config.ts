@@ -73,7 +73,12 @@ export const resumeConfig: ResumeConfig = {
     {
       title: { en: 'Backend', fr: 'Backend' },
       type: 'badges',
-      items: [{ name: 'FastAPI' }, { name: 'PostgreSQL' }, { name: 'Service Bus' }],
+      items: [
+        { name: 'FastAPI' },
+        { name: 'PostgreSQL' },
+        { name: 'pgvector' },
+        { name: 'Service Bus' },
+      ],
     },
     {
       title: { en: 'AI', fr: 'IA' },
@@ -85,10 +90,9 @@ export const resumeConfig: ResumeConfig = {
       type: 'badges',
       items: [
         { name: 'Git' },
-        { name: { en: 'Agile Methods', fr: 'Méthodes Agiles' } },
         { name: 'CI/CD' },
-        { name: 'GitHub Actions' },
         { name: 'Docker' },
+        { name: { en: 'Agile Methods', fr: 'Méthodes Agiles' } },
       ],
     },
     {
@@ -107,8 +111,8 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Self-training', fr: 'Auto-formation' },
       period: { en: 'Present - 09/2025', fr: 'Présent - 09/2025' },
       description: {
-        en: 'AZ-104 certified (Microsoft Azure Administrator), with a personal focus on cloud architecture, automation, and AI. Flagship project: "Job Finder" — a multi-agent AI pipeline on Azure that automates job offer sourcing.',
-        fr: 'Certifié AZ-104 (Microsoft Azure Administrator), avec un focus personnel sur l\' architecture cloud, l\' automatisation des tâches et l\'IA. Projet phare : "Job Finder", un pipeline multi-agents IA sur Azure qui automatise la recherche d\' offres d\'emploi.'
+        en: 'AZ-104 certified (Microsoft Azure Administrator), self-driven training focused on cloud architecture, automation and AI. Flagship project: "Job Finder" — a multi-agent AI pipeline on Azure that automates job offer sourcing and CV matching, built solo end-to-end and documented PR by PR (130+ merged PRs).',
+        fr: 'Certifié AZ-104 (Microsoft Azure Administrator), formation autonome axée sur l\'architecture cloud, l\'automatisation et l\'IA. Projet phare : "Job Finder", un pipeline multi-agents IA sur Azure qui automatise la recherche d\'offres et le matching de CV, construit en solo de bout en bout et documenté PR par PR (130+ PR mergées).',
       },
       techs: [
         'Azure',
@@ -116,19 +120,17 @@ export const resumeConfig: ResumeConfig = {
         'Python',
         'FastAPI',
         'PostgreSQL',
+        'pgvector',
         'OpenAI',
         'Claude',
         'Service Bus',
-        'GitHub Actions',
+        'Next.js',
+        'CI/CD',
+        'GitHub',
         'Docker',
       ],
       isHighlighted: true,
-      expandDescription: true,
       details: {
-        context: {
-          en: 'Independent, self-driven learning path following the AZ-104 certification. Core of this training is "job-finder", a personal portfolio project: a multi-agent AI system that fetches job offers, matches them against CVs via semantic search, and reviews CVs against top matches — built solo end-to-end (infrastructure, backend, AI pipeline, frontend) and documented PR by PR (130+ merged PRs).',
-          fr: 'Parcours de formation autonome faisant suite à la certification AZ-104. Le cœur de cette formation est "job-finder", un projet personnel de portfolio : un système multi-agents IA qui collecte des offres d\'emploi, les met en correspondance avec des CV par recherche sémantique, et analyse les CV au regard des meilleurs matchs — construit en solo de bout en bout (infrastructure, backend, pipeline IA, frontend) et documenté PR par PR (130+ PR mergées).',
-        },
         tasks: {
           en: [
             'Designed an Azure landing zone (networking, identity, governance) carrying a modular application layer, with reusable Terraform modules (network, compute, data, AI, messaging, monitoring) and remote state',
@@ -147,10 +149,6 @@ export const resumeConfig: ResumeConfig = {
             'Mise en place d\'un workflow de développement assisté par agents IA : jusqu\'à 4 agents Claude Code en simultané pour l\'implémentation, Claude Cowork pour les échanges d\'architecture et de planification, et un agent reviewer Claude autonome intégré en CI/CD pour la revue de code automatique sur chaque PR',
           ],
         },
-        env: {
-          en: 'Azure / Terraform / GitHub Actions / Python / FastAPI / PostgreSQL + pgvector / Azure OpenAI / Claude / Service Bus / Next.js / Docker',
-          fr: 'Azure / Terraform / GitHub Actions / Python / FastAPI / PostgreSQL + pgvector / Azure OpenAI / Claude / Service Bus / Next.js / Docker',
-        },
       },
     },
     {
@@ -160,30 +158,20 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Permanent', fr: 'CDI' },
       period: { en: '09/2025 - 05/2025', fr: '09/2025 - 05/2025' },
       description: {
-        en: 'Developed new features and fixed bugs on a transport management application, using C# and Oracle Database.',
-        fr: 'Développement de nouvelles fonctionnalités et correction de bugs sur une application de gestion de transport, en C# et Oracle Database.',
+        en: 'Developed new features and fixed bugs on a transport management application (C#, Oracle Database), contributing to an internal framework and a hybrid client/web application.',
+        fr: 'Développement de nouvelles fonctionnalités et correction de bugs sur une application de gestion de transport (C#, Oracle Database), avec contribution à un framework interne et à une application hybride client/web.',
       },
       techs: ['C#', 'Oracle Database', 'Azure DevOps'],
       details: {
-        context: {
-          en: 'C# development on a transport management application, contributing to an internal framework and a hybrid client/web application.',
-          fr: "Développement C# sur une application de gestion de transport, contribution à un framework interne et à une application hybride client/web.",
-        },
         tasks: {
           en: [
-            'Developed new features and fixed bugs on a transport management application using C# and Oracle Database',
-            'Contributed to architecture improvements and Gitflow processes with Azure DevOps pipelines',
+            'Contributed to architecture improvements and Gitflow processes on Azure DevOps',
             'Contributed to the development of an internal framework and a hybrid client/web application (3-tier architecture)',
           ],
           fr: [
-            'Développement de nouvelles fonctionnalités et correction de bugs sur une application de gestion de transport avec C# et Oracle Database',
-            "Contribution à l'amélioration de l'architecture et aux processus Gitflow avec des pipelines Azure DevOps",
+            "Contribution à l'amélioration de l'architecture et aux processus Gitflow sur Azure DevOps",
             "Contribution au développement d'un framework interne et d'une application hybride client/web (architecture 3-tier)",
           ],
-        },
-        env: {
-          en: 'C# / Oracle Database / Azure DevOps / Gitflow',
-          fr: 'C# / Oracle Database / Azure DevOps / Gitflow',
         },
       },
     },
@@ -194,15 +182,11 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Work-study program', fr: 'Alternance' },
       period: { en: '09/2024 - 09/2022', fr: '09/2024 - 09/2022' },
       description: {
-        en: 'Developed and enhanced a VR industrial application in collaboration with CEA, on Unity.',
-        fr: "Développement et amélioration d'une application industrielle VR en collaboration avec le CEA, sur Unity.",
+        en: 'Work-study program at LS Group (Suresnes), within the XR Twin team: developed and enhanced a VR/AR industrial visualization app on Unity, built with CEA for clients including Airbus, Dassault Aviation, Renault and Stellantis.',
+        fr: "Alternance chez LS Group (Suresnes), au sein de l'équipe XR Twin : développement et amélioration d'une application de visualisation industrielle VR/AR sur Unity, réalisée avec le CEA pour des clients comme Airbus, Dassault Aviation, Renault et Stellantis.",
       },
-      techs: ['Unity', 'C#', 'Netcode', 'Git', 'CI/CD', 'Agile Methods'],
+      techs: ['Unity', 'C#', 'Netcode', 'GitLab', 'CI/CD', 'Agile Methods'],
       details: {
-        context: {
-          en: 'Work-study program at LS Group (Suresnes), within the XR Twin team, on a VR/AR industrial visualization software built with CEA for clients including Airbus, Dassault Aviation, Renault, Stellantis, Saint-Gobain and ITER.',
-          fr: "Alternance chez LS Group (Suresnes), au sein de l'équipe XR Twin, sur un logiciel de visualisation industrielle VR/AR développé avec le CEA pour des clients comme Airbus, Dassault Aviation, Renault, Stellantis, Saint-Gobain et ITER.",
-        },
         tasks: {
           en: [
             'Designed and rebuilt the navigation system from scratch on Unity\'s Input System, with swappable presets matching Unity, Catia, SolidWorks, Inventor, Revit and SketchUp, plus a distance-adaptive "focus" camera',
@@ -221,10 +205,6 @@ export const resumeConfig: ResumeConfig = {
             'Travail avec GitFlow et CI/CD, au sein d\'équipes Agile (Scrum/Kanban)',
           ],
         },
-        env: {
-          en: 'Unity / C# / Netcode / GitFlow / CI/CD',
-          fr: 'Unity / C# / Netcode / GitFlow / CI/CD',
-        },
       },
     },
     {
@@ -234,15 +214,11 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Internship', fr: 'Stage' },
       period: { en: '08/2022 - 02/2022', fr: '08/2022 - 02/2022' },
       description: {
-        en: 'Designed tools and contributed to QA for VR e-learning training content.',
-        fr: "Conception d'outils et contribution à la QA pour du contenu de formation VR e-learning.",
+        en: 'Internship at Reality Academy (Bagnolet): designed tools and contributed to QA for a VR e-learning SaaS platform and training catalog, plus client projects for sister studio Reality Agency (Givenchy, Chanel, Nespresso).',
+        fr: "Stage chez Reality Academy (Bagnolet) : conception d'outils et contribution à la QA pour une plateforme SaaS et un catalogue de formations VR e-learning, ainsi que des projets clients pour la division sœur Reality Agency (Givenchy, Chanel, Nespresso).",
       },
-      techs: ['Unity', 'C#', 'AR', 'Git'],
+      techs: ['Unity', 'C#', 'AR', 'GitHub'],
       details: {
-        context: {
-          en: "Internship at Reality Academy (Bagnolet), within Reality's VR e-learning content team, on QA for a SaaS platform and a VR training catalog, plus two client projects for sister studio Reality Agency (Givenchy, Chanel, Nespresso, Amazon, DS Automobiles).",
-          fr: "Stage chez Reality Academy (Bagnolet), au sein de l'équipe contenu VR e-learning de Reality, sur la QA d'une plateforme SaaS et d'un catalogue de formations VR, avec deux projets clients pour la division sœur Reality Agency (Givenchy, Chanel, Nespresso, Amazon, DS Automobiles).",
-        },
         tasks: {
           en: [
             'Built a 250+ item test/acceptance checklist (cahier de recette) validated across 4 VR headsets (Pico G2 4K, Pico Neo 3, Oculus Quest, HTC Vive) before every production release',
@@ -259,10 +235,6 @@ export const resumeConfig: ResumeConfig = {
             "Livraison de l'expérience VR de sécurité Andra, et développement d'une fonctionnalité vidéo AR ainsi que d'un outil de photographie d'assets automatisé pour Wimbledon, en tant que projets clients pour Reality Agency",
           ],
         },
-        env: {
-          en: 'Unity / C# / AR',
-          fr: 'Unity / C# / AR',
-        },
       },
     },
     {
@@ -272,15 +244,11 @@ export const resumeConfig: ResumeConfig = {
       type: { en: 'Studies', fr: 'Études' },
       period: { en: '09/2024 - 09/2019', fr: '09/2024 - 09/2019' },
       description: {
-        en: 'Developed multiple projects in Unity and Unreal, with C# and C++ applications (gameplay systems, AI, networking).',
-        fr: "Développement de plusieurs projets avec Unity et Unreal, en C# et C++ (systèmes de gameplay, IA, réseau).",
+        en: 'Student projects for the Game Programming curriculum at IIM (Paris La Défense), solo and in teams: gameplay systems, AI and networking in Unity, Unreal and custom C++ network engines.',
+        fr: "Projets étudiants du cursus Game Programming à l'IIM (Paris La Défense), en solo et en équipe : systèmes de gameplay, IA et réseau sur Unity, Unreal et moteurs réseau custom en C++.",
       },
-      techs: ['Unity', 'Unreal', 'C#', 'C++', 'Git', 'Agile Methods'],
+      techs: ['Unity', 'Unreal', 'C#', 'C++', 'GitHub', 'GitLab', 'Agile Methods'],
       details: {
-        context: {
-          en: 'Student projects completed as part of the Game Programming curriculum at IIM (Paris La Défense), solo and in teams, with Unity, Unreal and custom C++ network engines.',
-          fr: "Projets étudiants réalisés dans le cadre du cursus Game Programming à l'IIM (Paris La Défense), en solo et en équipe, avec Unity, Unreal et des moteurs réseau custom en C++.",
-        },
         tasks: {
           en: [
             'Dwarfs Delight, 6 weeks, 13 people:\nLead Programmer on this local multiplayer couch game for 2-4 players, selected by IIM for the Pégases awards and published on Steam',
@@ -296,10 +264,6 @@ export const resumeConfig: ResumeConfig = {
             "Procedural Dungeon Generation, 2 semaines, 2 personnes :\nAdaptation de Dwarfs Delight en un dungeon crawler à génération procédurale, refonte de son architecture autour de l'algorithme de génération d'étages de mon camarade (enchaînement des salles, portes, types de salles), et création des prefabs de salles, de leur diversité et du contenu associé (contrôles, level design). Ajout d'un système de déblocage de capacité conditionnant le passage à l'étage suivant",
             "Accompagnement pédagogique de camarades de classe sur des problèmes de code et des revues de code",
           ],
-        },
-        env: {
-          en: 'Unity / Unreal / C# / C++',
-          fr: 'Unity / Unreal / C# / C++',
         },
       },
     },
@@ -394,7 +358,6 @@ export const resumeConfig: ResumeConfig = {
       mainTasks: { en: 'Main tasks:', fr: 'Tâches principales :' },
       moreTasks: { en: 'more tasks...', fr: 'autres tâches...' },
       training: { en: 'Training:', fr: 'Formations :' },
-      techEnv: { en: 'Tech environment:', fr: 'Env. technique :' },
       technologies: { en: 'Technologies', fr: 'Technologies' },
     },
     actions: {

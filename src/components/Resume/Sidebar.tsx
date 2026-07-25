@@ -2,7 +2,7 @@ import { useTranslation } from '@/lib/i18n'
 import { resumeConfig } from '@/data/resume-config'
 import { assetUrl } from '@/lib/utils'
 import { detectedAssets } from 'virtual:detected-assets'
-import { ExternalLinkIcon } from '@/components/icons'
+import { ExternalLinkIcon, LinkedInIcon } from '@/components/icons'
 import { SidebarSection } from './SidebarSection'
 import { ContactItem } from './ContactItem'
 import { ProfilePhoto } from './ProfilePhoto'
@@ -41,8 +41,11 @@ export function Sidebar() {
               href={referent.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group font-medium text-sm text-resume-text-secondary hover:text-resume-primary transition-colors duration-200"
+              className="group flex items-center gap-3 font-medium text-sm text-resume-text-secondary hover:text-resume-primary transition-colors duration-200"
             >
+              <span className="text-resume-primary group-hover:scale-115 transition-transform duration-200">
+                <LinkedInIcon className="w-4 h-4" />
+              </span>
               <span className="relative inline-flex items-center gap-1 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-resume-primary after:origin-left after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300">
                 {referent.name}
                 <ExternalLinkIcon className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0" />

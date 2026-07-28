@@ -4,6 +4,7 @@ interface ExperienceDetailsContentProps {
   tasks?: string[]
   training?: string[]
   techs?: string[]
+  projectLink?: { label: string; url: string }
   labels: {
     mainTasks: string
     moreTasks: string
@@ -17,6 +18,7 @@ export function ExperienceDetailsContent({
   tasks,
   training,
   techs,
+  projectLink,
   labels,
   variant,
 }: ExperienceDetailsContentProps) {
@@ -51,6 +53,19 @@ export function ExperienceDetailsContent({
               </li>
             )}
           </ul>
+          {projectLink && (
+            <p className="text-xs text-resume-text-secondary mt-2">
+              {projectLink.label}{' '}
+              <a
+                href={projectLink.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-resume-primary hover:underline"
+              >
+                {projectLink.url}
+              </a>
+            </p>
+          )}
         </div>
       )}
 

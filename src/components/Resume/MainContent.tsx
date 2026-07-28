@@ -89,6 +89,9 @@ export function MainContent() {
                   ? {
                       tasks: exp.details.tasks ? resolveArray(exp.details.tasks) : undefined,
                       training: exp.details.training ? resolveArray(exp.details.training) : undefined,
+                      projectLink: exp.details.projectLink
+                        ? { label: resolve(exp.details.projectLink.label), url: exp.details.projectLink.url }
+                        : undefined,
                     }
                   : undefined
               }

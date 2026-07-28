@@ -49,6 +49,7 @@ export interface Experience {
   details?: {
     tasks?: LocalizedStringArray
     training?: LocalizedStringArray
+    projectLink?: { label: LocalizedString; url: string }
   }
 }
 

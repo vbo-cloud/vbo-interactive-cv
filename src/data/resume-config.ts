@@ -149,6 +149,10 @@ export const resumeConfig: ResumeConfig = {
             'Mise en place d\'un workflow de développement assisté par agents IA : jusqu\'à 4 agents Claude Code en simultané pour l\'implémentation, Claude Cowork pour les échanges d\'architecture et de planification, et un agent reviewer Claude autonome intégré en CI/CD pour la revue de code automatique sur chaque PR',
           ],
         },
+        projectLink: {
+          label: { en: 'Project:', fr: 'Projet :' },
+          url: 'https://jobfinder.vincentboutin.dev',
+        },
       },
     },
     {

@@ -19,6 +19,7 @@ interface ExperienceItemProps {
   details?: {
     tasks?: string[]
     training?: string[]
+    projectLink?: { label: string; url: string }
   }
   subItem?: { title: string; description: string }
   labels: {
@@ -129,6 +130,7 @@ export function ExperienceItem({
                 <ExperienceDetailsContent
                   tasks={details.tasks}
                   training={details.training}
+                  projectLink={details.projectLink}
                   labels={labels}
                   variant="inline"
                 />
@@ -154,6 +156,7 @@ export function ExperienceItem({
             tasks={details.tasks}
             training={details.training}
             techs={techs}
+            projectLink={details.projectLink}
             labels={labels}
             variant="modal"
           />

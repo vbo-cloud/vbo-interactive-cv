@@ -18,9 +18,13 @@ function resolveThemeColors(config: ResumeConfig) {
 }
 
 /** Inlines public/images/FullImage.png as a data URI so the PDF is self-contained (no network fetch at print time). */
-function getFullImagePreviewDataUri(): string | null {
+/**
+ * The PDF is printed from `page.setContent()` with no base URL, so relative image
+ * paths never resolve — every image has to be inlined as a data URI.
+ */
+function getImageDataUri(fileName: string): string | null {
   try {
-    const imgPath = path.resolve(process.cwd(), 'public', 'images', 'FullImage.png')
+    const imgPath = path.resolve(process.cwd(), 'public', 'images', fileName)
     const buffer = fs.readFileSync(imgPath)
     return `data:image/png;base64,${buffer.toString('base64')}`
   } catch {
@@ -144,21 +148,28 @@ export function renderResumeHtml(
   // Hero banner — only on the generated PDF (siteUrl is only passed there, never for the <noscript> fallback),
   // so a recruiter opening the file immediately sees and can click through to the interactive version.
   if (siteUrl) {
-    const previewDataUri = getFullImagePreviewDataUri()
+    const previewDataUri = getImageDataUri('FullImage.png')
+    const qrCodeDataUri = getImageDataUri('qr-code.png')
     const ctaLabel = resolve(config.labels.actions.viewInteractive ?? { en: 'View the interactive resume', fr: 'Voir le CV interactif' })
     const heroHeadline = lang === 'fr'
       ? 'Ce CV existe aussi en version interactive'
       : 'This resume also exists as an interactive version'
 
-    lines.push(`${indent}  <a href="${escapeHtml(siteUrl)}" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding: 1.25rem; border-radius: 14px; background: ${colors.primary}12; border: 1px solid ${colors.primary}40; text-decoration: none;">`)
+    lines.push(`${indent}  <a href="${escapeHtml(siteUrl)}" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 1.25rem; border-radius: 14px; background: ${colors.primary}12; border: 1px solid ${colors.primary}40; text-decoration: none;">`)
     if (previewDataUri) {
       lines.push(`${indent}    <img src="${previewDataUri}" alt="${escapeHtml(personal.name)} - ${escapeHtml(heroHeadline)}" style="width: 130px; height: auto; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); flex-shrink: 0;" />`)
     }
-    lines.push(`${indent}    <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem;">`)
-    lines.push(`${indent}      <span style="font-size: 1.05rem; font-weight: 700; color: ${colors.text};">✨ ${escapeHtml(heroHeadline)}</span>`)
+    lines.push(`${indent}    <span style="display: flex; flex-direction: column; align-items: flex-start; align-self: flex-start; gap: 0.6rem;">`)
+    lines.push(`${indent}      <span style="font-size: 1rem; font-weight: 700; color: ${colors.text}; white-space: nowrap;">✨ ${escapeHtml(heroHeadline)}</span>`)
     lines.push(`${indent}      <span style="display: inline-block; padding: 0.65rem 1.4rem; border-radius: 8px; background: ${colors.primary}; color: #ffffff; font-weight: 600; font-size: 0.95rem;">${escapeHtml(ctaLabel)} →</span>`)
-    lines.push(`${indent}      <span style="font-size: 0.8rem; color: ${colors.textSecondary};">${escapeHtml(siteUrl.replace(/^https?:\/\//, ''))}</span>`)
+    lines.push(`${indent}      <span style="font-size: 0.8rem; color: ${colors.textSecondary};">${escapeHtml(siteUrl)}</span>`)
     lines.push(`${indent}    </span>`)
+    if (qrCodeDataUri) {
+      // Bottom-right corner: margin-left auto pushes it right, align-self flex-end drops
+      // it to the padding edge, so it clears the border by the same 1.25rem as the
+      // thumbnail opposite. Widths are tuned so it never spills into that padding.
+      lines.push(`${indent}    <img src="${qrCodeDataUri}" alt="${escapeHtml(siteUrl)}" style="width: 124px; height: 124px; margin-left: auto; align-self: flex-end; flex-shrink: 0;" />`)
+    }
     lines.push(`${indent}  </a>`)
   }
 

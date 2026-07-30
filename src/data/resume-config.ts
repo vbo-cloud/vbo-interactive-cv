@@ -48,15 +48,25 @@ export const resumeConfig: ResumeConfig = {
     { type: 'location', label: 'Annemasse' },
   ],
 
-  // ===== REFERENT =====
-  referent: {
-    name: 'Samy-Adrien FOUDIL',
-    href: 'https://www.linkedin.com/in/sfoudil/',
-    title: {
-      en: 'MLOps AWS | Fullstack Python Developer',
-      fr: 'MLOps AWS | Développeur Python Fullstack',
+  // ===== REFERENTS =====
+  referents: [
+    {
+      name: 'Samy-Adrien FOUDIL - EDF',
+      href: 'https://www.linkedin.com/in/sfoudil/',
+      title: {
+        en: 'MLOps AWS | Fullstack Python Developer',
+        fr: 'MLOps AWS | Développeur Python Fullstack',
+      },
     },
-  },
+    {
+      name: 'Cédric BEMATOL - LS GROUP',
+      href: 'https://www.linkedin.com/in/cedric-bematol/',
+      title: {
+        en: 'Senior Software Engineer',
+        fr: 'Senior Software Engineer',
+      },
+    },
+  ],
 
   // ===== SKILLS =====
   skills: [
@@ -359,7 +369,7 @@ export const resumeConfig: ResumeConfig = {
       education: { en: 'EDUCATION', fr: 'FORMATION' },
       values: { en: 'VALUES', fr: 'VALEURS' },
       hobbies: { en: 'HOBBIES', fr: 'LOISIRS' },
-      referent: { en: 'REFERENT', fr: 'RÉFÉRENT' },
+      referent: { en: 'REFERENTS', fr: 'RÉFÉRENTS' },
     },
     experience: {
       mainTasks: { en: 'Main tasks:', fr: 'Tâches principales :' },

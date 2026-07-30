@@ -21,7 +21,6 @@ export function MainContent() {
 
   const experienceLabels = {
     mainTasks: resolve(labels.experience.mainTasks),
-    moreTasks: resolve(labels.experience.moreTasks),
     training: labels.experience.training ? resolve(labels.experience.training) : undefined,
     technologies: resolve(labels.experience.technologies),
   }
@@ -80,6 +79,7 @@ export function MainContent() {
               company={resolve(exp.company)}
               type={exp.type ? resolve(exp.type) : undefined}
               role={resolve(exp.role)}
+              url={exp.url}
               description={resolve(exp.description)}
               techs={exp.techs}
               expanded={expandedExp === exp.id}
@@ -89,9 +89,6 @@ export function MainContent() {
                   ? {
                       tasks: exp.details.tasks ? resolveArray(exp.details.tasks) : undefined,
                       training: exp.details.training ? resolveArray(exp.details.training) : undefined,
-                      projectLink: exp.details.projectLink
-                        ? { label: resolve(exp.details.projectLink.label), url: exp.details.projectLink.url }
-                        : undefined,
                     }
                   : undefined
               }

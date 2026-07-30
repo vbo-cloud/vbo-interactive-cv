@@ -117,7 +117,8 @@ export const resumeConfig: ResumeConfig = {
     {
       id: 'job-finder',
       company: { en: 'Job Finder', fr: 'Job Finder' },
-      role: { en: 'Cloud Engineer (Azure)', fr: 'Cloud Engineer (Azure)' },
+      role: { en: 'DevOps / Cloud Engineer (Azure)', fr: 'DevOps / Cloud Engineer (Azure)' },
+      url: 'https://jobfinder.vincentboutin.dev',
       type: { en: 'Independent project', fr: 'Projet indépendant' },
       period: { en: '09/2025 - Present', fr: '09/2025 - Présent' },
       description: {
@@ -161,10 +162,6 @@ export const resumeConfig: ResumeConfig = {
             "Conception d'un backend FastAPI (authentification JWT via Microsoft Entra External ID) et d'un frontend Next.js 14, sécurisés de bout en bout : VNet avec endpoints/DNS privés, Key Vault, RBAC au moindre privilège, identité managée/workload",
             "Observabilité avec Application Insights, Log Analytics et un dashboard Grafana, alertes Azure Monitor sur les échecs de jobs et les files Service Bus, budget mensuel Azure alerté, et analytics produit via PostHog",
           ],
-        },
-        projectLink: {
-          label: { en: 'Project:', fr: 'Projet :' },
-          url: 'https://jobfinder.vincentboutin.dev',
         },
       },
     },
@@ -373,7 +370,6 @@ export const resumeConfig: ResumeConfig = {
     },
     experience: {
       mainTasks: { en: 'Main tasks:', fr: 'Tâches principales :' },
-      moreTasks: { en: 'more tasks...', fr: 'autres tâches...' },
       training: { en: 'Training:', fr: 'Formations :' },
       technologies: { en: 'Technologies', fr: 'Technologies' },
     },

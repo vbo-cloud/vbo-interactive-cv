@@ -117,6 +117,9 @@ const TECH_REGISTRY = {
   'Nginx': { color: '#009639' },
   'Linux': { color: '#FCC624' },
 
+  // ===== Observability =====
+  'PostHog': { color: '#F54E00' },
+
   // ===== CSS & UI =====
   'Tailwind CSS': { color: '#06B6D4' },
   'Tailwind': { color: '#06B6D4' },
@@ -241,7 +244,7 @@ const WORKFLOW_TECHS = new Set(['Git', 'CI/CD', 'GitHub', 'GitLab', 'Azure DevOp
  * Support tier — genuinely used, but not the argument for hiring: real second-plan
  * credibility. Desaturated so it reads as "also true" rather than competing with brand tier.
  */
-const SUPPORT_TECHS = new Set(['FastAPI', 'PostgreSQL', 'C#'])
+const SUPPORT_TECHS = new Set(['FastAPI', 'PostgreSQL', 'C#', 'PostHog'])
 
 /**
  * Resolves the visual tier for a tech name. Anything not classified above is `muted`

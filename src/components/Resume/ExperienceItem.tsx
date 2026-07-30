@@ -118,7 +118,7 @@ export function ExperienceItem({
                 {url}
               </a>
             )}
-            <p className="text-xs text-resume-text-secondary/80 mt-1 line-clamp-4">{description}</p>
+            <p className="text-xs text-resume-text-secondary/80 mt-1 line-clamp-5">{description}</p>
 
             <div className="flex flex-wrap gap-1.5 mt-2">
               {techs.map((tech) => (

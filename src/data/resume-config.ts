@@ -7,27 +7,18 @@ export const resumeConfig: ResumeConfig = {
     // Pinned explicitly: public/images/ also holds FullImage.png (PDF hero preview) and
     // Thumbnail.png, which would otherwise confuse the auto-detection in vite-plugin-assets-detect.ts
     photo: '/images/photo.jpg',
-    photoBackEmoji: '🎮',
+    photoBackEmoji: '☁️',
     title: {
       en: 'DevOps / Cloud Engineer (Azure)',
       fr: 'DevOps / Cloud Engineer (Azure)',
-    },
-    tagline: {
-      en: 'AI Automation & Orchestration',
-      fr: 'Automatisation et Orchestration IA',
-    },
-    subtitle: {
-      en: 'From game development to cloud engineering',
-      fr: "Du développement de jeux vidéo à l'ingénierie cloud",
     },
     location: 'Annemasse',
   },
 
   // ===== SEO (used in <head> meta tags) =====
   seo: {
-    title: 'Vincent Boutin - Cloud Engineer (Azure)',
-    description:
-      'Interactive resume of Vincent Boutin, Cloud Engineer (Azure), AZ-104 certified, with a background in VR/game development (Unity, Unreal, C#/C++).',
+    title: 'Vincent Boutin - DevOps / Cloud Engineer (Azure)',
+    description: 'DevOps / Cloud Engineer (Azure)',
   },
 
   // ===== LANGUAGES =====
@@ -104,11 +95,6 @@ export const resumeConfig: ResumeConfig = {
         { name: 'Docker' },
         { name: { en: 'Agile Methods', fr: 'Méthodes Agiles' } },
       ],
-    },
-    {
-      title: { en: 'Engine', fr: 'Moteurs' },
-      type: 'badges',
-      items: [{ name: 'Unity' }, { name: 'Unreal' }],
     },
   ],
 
@@ -315,22 +301,8 @@ export const resumeConfig: ResumeConfig = {
     },
   ],
 
-  // ===== VALUES =====
-  values: [
-    { en: 'Excellence', fr: 'Excellence' },
-    { en: 'Continuous Improvement', fr: 'Amélioration continue' },
-    { en: 'Knowledge Sharing', fr: 'Partage de connaissances' },
-  ],
-
   // ===== HOBBIES =====
   hobbies: [
-    {
-      title: { en: 'Game Dev', fr: 'Dev Jeux Vidéo' },
-      details: [
-        { en: 'Game Jams', fr: 'Game Jams' },
-        { en: 'Personal Projects', fr: 'Projets personnels' },
-      ],
-    },
     {
       title: { en: 'Sports', fr: 'Sport' },
       details: [

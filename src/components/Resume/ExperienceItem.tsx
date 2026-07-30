@@ -64,17 +64,24 @@ export function ExperienceItem({
       whileHover={isHighlighted ? { scale: 1.02 } : {}}
       transition={{ duration: 0.2 }}
     >
-      <button
-        onClick={handleClick}
-        aria-expanded={details ? expanded : undefined}
-        className="w-full text-left group relative z-10 cursor-pointer"
-      >
+      <div className="w-full text-left group relative">
+        {/* The click surface is an overlay rather than a wrapper around the card:
+            the project link below has to be a real anchor, and nesting one inside
+            a <button> is invalid markup. Hover moves to group-hover accordingly. */}
+        {details && (
+          <button
+            onClick={handleClick}
+            aria-expanded={expanded}
+            aria-label={`${company} - ${role}`}
+            className="absolute inset-0 z-10 cursor-pointer"
+          />
+        )}
         <div
           className={cn(
             'flex items-start gap-4 py-3 rounded-lg px-3 -mx-3 transition-all duration-300',
             isHighlighted
-              ? 'border-2 border-resume-primary/30 bg-resume-primary/5 hover:border-resume-primary/50 hover:shadow-md'
-              : 'hover:bg-resume-primary/5'
+              ? 'border-2 border-resume-primary/30 bg-resume-primary/5 group-hover:border-resume-primary/50 group-hover:shadow-md'
+              : 'group-hover:bg-resume-primary/5'
           )}
         >
           <div className="w-20 flex-shrink-0">
@@ -99,10 +106,18 @@ export function ExperienceItem({
               )}
             </div>
             <p className="text-xs text-resume-text-secondary mt-0.5">{role}</p>
-            {/* Plain text, not an anchor: this whole card is a <button>, and nesting
-                interactive content inside one is invalid. The modal header and the
-                PDF/SEO render carry the same URL as a real link. */}
-            {url && <p className="text-xs text-resume-primary mt-0.5">{url}</p>}
+            {/* z-20 lifts it above the click overlay, so the anchor wins the click
+                and the card does not toggle underneath it. */}
+            {url && (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-20 inline-block text-xs text-resume-link hover:underline mt-0.5 break-all"
+              >
+                {url}
+              </a>
+            )}
             <p className="text-xs text-resume-text-secondary/80 mt-1 line-clamp-4">{description}</p>
 
             <div className="flex flex-wrap gap-1.5 mt-2">
@@ -119,7 +134,7 @@ export function ExperienceItem({
             )}
           </div>
         </div>
-      </button>
+      </div>
 
       {isDesktop && details && (
         <AnimatePresence>
@@ -156,7 +171,7 @@ export function ExperienceItem({
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-resume-primary hover:underline break-all"
+                  className="text-xs text-resume-link hover:underline break-all"
                 >
                   {url}
                 </a>

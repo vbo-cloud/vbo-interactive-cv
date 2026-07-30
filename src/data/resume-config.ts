@@ -87,6 +87,16 @@ export const resumeConfig: ResumeConfig = {
       items: [{ name: 'OpenAI' }, { name: 'Claude' }],
     },
     {
+      title: { en: 'Observability', fr: 'Observabilité' },
+      type: 'badges',
+      items: [
+        { name: 'Application Insights' },
+        { name: 'Log Analytics' },
+        { name: 'Grafana' },
+        { name: 'PostHog' },
+      ],
+    },
+    {
       title: { en: 'Workflow', fr: 'Workflow' },
       type: 'badges',
       items: [

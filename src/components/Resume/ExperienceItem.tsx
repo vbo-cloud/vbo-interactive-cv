@@ -12,6 +12,7 @@ interface ExperienceItemProps {
   company: string
   type?: string
   role: string
+  url?: string
   description: string
   techs: string[]
   expanded: boolean
@@ -19,12 +20,10 @@ interface ExperienceItemProps {
   details?: {
     tasks?: string[]
     training?: string[]
-    projectLink?: { label: string; url: string }
   }
   subItem?: { title: string; description: string }
   labels: {
     mainTasks: string
-    moreTasks: string
     training?: string
     technologies: string
   }
@@ -36,6 +35,7 @@ export function ExperienceItem({
   company,
   type,
   role,
+  url,
   description,
   techs,
   expanded,
@@ -99,6 +99,10 @@ export function ExperienceItem({
               )}
             </div>
             <p className="text-xs text-resume-text-secondary mt-0.5">{role}</p>
+            {/* Plain text, not an anchor: this whole card is a <button>, and nesting
+                interactive content inside one is invalid. The modal header and the
+                PDF/SEO render carry the same URL as a real link. */}
+            {url && <p className="text-xs text-resume-primary mt-0.5">{url}</p>}
             <p className="text-xs text-resume-text-secondary/80 mt-1 line-clamp-4">{description}</p>
 
             <div className="flex flex-wrap gap-1.5 mt-2">
@@ -130,7 +134,6 @@ export function ExperienceItem({
                 <ExperienceDetailsContent
                   tasks={details.tasks}
                   training={details.training}
-                  projectLink={details.projectLink}
                   labels={labels}
                   variant="inline"
                 />
@@ -148,6 +151,16 @@ export function ExperienceItem({
             <div>
               <h2 className="font-semibold text-lg text-resume-text">{company}</h2>
               <p className="text-sm text-resume-primary">{role}</p>
+              {url && (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-resume-primary hover:underline break-all"
+                >
+                  {url}
+                </a>
+              )}
               <p className="text-xs text-resume-text-secondary mt-1">{year}</p>
             </div>
           }
@@ -156,7 +169,6 @@ export function ExperienceItem({
             tasks={details.tasks}
             training={details.training}
             techs={techs}
-            projectLink={details.projectLink}
             labels={labels}
             variant="modal"
           />

@@ -37,6 +37,8 @@ export interface Experience {
   id: string
   company: LocalizedString
   role: LocalizedString
+  /** Public URL for the work itself, shown right under the role */
+  url?: string
   type?: LocalizedString
   period: LocalizedString
   description: LocalizedString
@@ -49,7 +51,6 @@ export interface Experience {
   details?: {
     tasks?: LocalizedStringArray
     training?: LocalizedStringArray
-    projectLink?: { label: LocalizedString; url: string }
   }
 }
 
@@ -128,7 +129,6 @@ export interface ResumeLabels {
   }
   experience: {
     mainTasks: LocalizedString
-    moreTasks: LocalizedString
     training?: LocalizedString
     technologies: LocalizedString
   }

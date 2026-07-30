@@ -353,7 +353,6 @@ export const resumeConfig: ResumeConfig = {
     },
     experience: {
       mainTasks: { en: 'Main tasks:', fr: 'Tâches principales :' },
-      moreTasks: { en: 'more tasks...', fr: 'autres tâches...' },
       training: { en: 'Training:', fr: 'Formations :' },
       technologies: { en: 'Technologies', fr: 'Technologies' },
     },

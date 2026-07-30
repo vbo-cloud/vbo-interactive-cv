@@ -152,7 +152,7 @@ export function renderResumeHtml(
 
     lines.push(`${indent}  <a href="${escapeHtml(siteUrl)}" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding: 1.25rem; border-radius: 14px; background: ${colors.primary}12; border: 1px solid ${colors.primary}40; text-decoration: none;">`)
     if (previewDataUri) {
-      lines.push(`${indent}    <img src="${previewDataUri}" alt="${escapeHtml(personal.name)} — ${escapeHtml(heroHeadline)}" style="width: 130px; height: auto; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); flex-shrink: 0;" />`)
+      lines.push(`${indent}    <img src="${previewDataUri}" alt="${escapeHtml(personal.name)} - ${escapeHtml(heroHeadline)}" style="width: 130px; height: auto; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); flex-shrink: 0;" />`)
     }
     lines.push(`${indent}    <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem;">`)
     lines.push(`${indent}      <span style="font-size: 1.05rem; font-weight: 700; color: ${colors.text};">✨ ${escapeHtml(heroHeadline)}</span>`)
@@ -240,7 +240,10 @@ export function renderResumeHtml(
     lines.push(`${indent}    ${sectionTitle(resolve(config.labels.sections.experience))}`)
     for (const exp of experiences) {
       lines.push(`${indent}    <article style="margin-bottom: 1.25rem;">`)
-      lines.push(`${indent}      <h3 style="margin: 0 0 0.15rem 0; font-size: 1rem; color: ${colors.text};">${escapeHtml(resolve(exp.role))} — ${escapeHtml(resolve(exp.company))}</h3>`)
+      lines.push(`${indent}      <h3 style="margin: 0 0 0.15rem 0; font-size: 1rem; color: ${colors.text};">${escapeHtml(resolve(exp.role))} - ${escapeHtml(resolve(exp.company))}</h3>`)
+      if (exp.url) {
+        lines.push(`${indent}      <p style="margin: 0 0 0.15rem 0; font-size: 0.9rem;"><a href="${escapeHtml(exp.url)}" style="color: ${colors.primary}; text-decoration: ${isPdf ? 'underline' : 'none'};">${escapeHtml(exp.url)}</a></p>`)
+      }
       const periodText = resolve(exp.period)
       const meta = [isPdf ? reverseDateRange(periodText) : periodText]
       if (exp.type) meta.push(resolve(exp.type))

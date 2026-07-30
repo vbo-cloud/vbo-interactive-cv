@@ -18,7 +18,8 @@ export const resumeConfig: ResumeConfig = {
   // ===== SEO (used in <head> meta tags) =====
   seo: {
     title: 'Vincent Boutin - DevOps / Cloud Engineer (Azure)',
-    description: 'DevOps / Cloud Engineer (Azure)',
+    description:
+      'DevOps / Cloud Engineer (Azure). AZ-104. Job Finder, plateforme multi-agents sur Azure en production.',
   },
 
   // ===== LANGUAGES =====

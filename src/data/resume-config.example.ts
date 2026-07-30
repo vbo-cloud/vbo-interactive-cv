@@ -55,12 +55,14 @@ export const resumeConfig: ResumeConfig = {
     { type: 'location', label: 'Paris, France' },
   ],
 
-  // ===== REFERENT (optional) =====
-  // referent: {
-  //   name: 'John Smith',
-  //   href: 'https://www.linkedin.com/in/johnsmith/',
-  //   title: { en: 'Engineering Manager', fr: 'Manager Ingénierie' },
-  // },
+  // ===== REFERENTS (optional) =====
+  // referents: [
+  //   {
+  //     name: 'John Smith',
+  //     href: 'https://www.linkedin.com/in/johnsmith/',
+  //     title: { en: 'Engineering Manager', fr: 'Manager Ingénierie' },
+  //   },
+  // ],
 
   // ===== SKILLS =====
   skills: [
@@ -351,7 +353,6 @@ export const resumeConfig: ResumeConfig = {
     },
     experience: {
       mainTasks: { en: 'Main tasks:', fr: 'Tâches principales :' },
-      moreTasks: { en: 'more tasks...', fr: 'autres tâches...' },
       training: { en: 'Training:', fr: 'Formations :' },
       technologies: { en: 'Technologies', fr: 'Technologies' },
     },

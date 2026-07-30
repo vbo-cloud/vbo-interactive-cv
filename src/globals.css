@@ -7,6 +7,7 @@
   --color-resume-text-secondary: var(--resume-text-secondary);
   --color-resume-primary: var(--resume-primary);
   --color-resume-primary-light: var(--resume-primary-light);
+  --color-resume-link: var(--resume-link);
   --color-resume-sidebar-from: var(--resume-sidebar-from);
   --color-resume-sidebar-to: var(--resume-sidebar-to);
 }
@@ -20,6 +21,9 @@
   --resume-text-secondary: #6b6b6b;
   --resume-primary: #171717;
   --resume-primary-light: #737373;
+  /* The palette is deliberately monochrome, so links need their own hue to read
+     as clickable at all. Blue on both themes, picked for contrast on the bg. */
+  --resume-link: #2563eb;
   --resume-sidebar-from: #f4f4f4;
   --resume-sidebar-to: #ebebeb;
 }
@@ -31,6 +35,7 @@
   --resume-text-secondary: #a0a0a0;
   --resume-primary: #e5e5e5;
   --resume-primary-light: #a3a3a3;
+  --resume-link: #60a5fa;
   --resume-sidebar-from: #0f0f0f;
   --resume-sidebar-to: #0a0a0a;
 }

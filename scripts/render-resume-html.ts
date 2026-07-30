@@ -18,9 +18,34 @@ function resolveThemeColors(config: ResumeConfig) {
 }
 
 /** Inlines public/images/FullImage.png as a data URI so the PDF is self-contained (no network fetch at print time). */
-function getFullImagePreviewDataUri(): string | null {
+/**
+ * Inline SVG twins of the sidebar icons in src/components/icons/index.tsx. Kept as raw
+ * markup rather than imported, since those are JSX components this script cannot render.
+ * Attributes are kebab-case here: this is real SVG, not JSX.
+ */
+const INLINE_ICONS: Record<string, string> = {
+  linkedin:
+    '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>',
+  website:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>',
+}
+
+/**
+ * Renders an icon slot. The slot is emitted even when no icon matches, so every line in
+ * a list starts its text at the same x whether or not it carries one.
+ */
+function iconSlot(name: string | null, color: string): string {
+  const svg = name ? INLINE_ICONS[name] : undefined
+  return `<span style="display: inline-block; width: 14px; height: 14px; margin-right: 0.5rem; vertical-align: -2px; color: ${color};">${svg ?? ''}</span>`
+}
+
+/**
+ * The PDF is printed from `page.setContent()` with no base URL, so relative image
+ * paths never resolve — every image has to be inlined as a data URI.
+ */
+function getImageDataUri(fileName: string): string | null {
   try {
-    const imgPath = path.resolve(process.cwd(), 'public', 'images', 'FullImage.png')
+    const imgPath = path.resolve(process.cwd(), 'public', 'images', fileName)
     const buffer = fs.readFileSync(imgPath)
     return `data:image/png;base64,${buffer.toString('base64')}`
   } catch {
@@ -135,7 +160,7 @@ export function renderResumeHtml(
   const sectionTitle = (label: string) =>
     `<h2 style="font-size: 1.1rem; text-transform: uppercase; color: ${colors.text}; border-bottom: 2px solid ${colors.primary}40; padding-bottom: 0.25rem; margin-bottom: 0.5rem;">${escapeHtml(label)}</h2>`
 
-  const { personal, contact, skills, experiences, education, projects, values, hobbies, referent } = config
+  const { personal, contact, skills, experiences, education, projects, values, hobbies, referents } = config
   const lines: string[] = []
 
   const indent = '      '
@@ -144,21 +169,28 @@ export function renderResumeHtml(
   // Hero banner — only on the generated PDF (siteUrl is only passed there, never for the <noscript> fallback),
   // so a recruiter opening the file immediately sees and can click through to the interactive version.
   if (siteUrl) {
-    const previewDataUri = getFullImagePreviewDataUri()
+    const previewDataUri = getImageDataUri('FullImage.png')
+    const qrCodeDataUri = getImageDataUri('qr-code.png')
     const ctaLabel = resolve(config.labels.actions.viewInteractive ?? { en: 'View the interactive resume', fr: 'Voir le CV interactif' })
     const heroHeadline = lang === 'fr'
       ? 'Ce CV existe aussi en version interactive'
       : 'This resume also exists as an interactive version'
 
-    lines.push(`${indent}  <a href="${escapeHtml(siteUrl)}" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding: 1.25rem; border-radius: 14px; background: ${colors.primary}12; border: 1px solid ${colors.primary}40; text-decoration: none;">`)
+    lines.push(`${indent}  <a href="${escapeHtml(siteUrl)}" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 1.25rem; border-radius: 14px; background: ${colors.primary}12; border: 1px solid ${colors.primary}40; text-decoration: none;">`)
     if (previewDataUri) {
-      lines.push(`${indent}    <img src="${previewDataUri}" alt="${escapeHtml(personal.name)} — ${escapeHtml(heroHeadline)}" style="width: 130px; height: auto; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); flex-shrink: 0;" />`)
+      lines.push(`${indent}    <img src="${previewDataUri}" alt="${escapeHtml(personal.name)} - ${escapeHtml(heroHeadline)}" style="width: 130px; height: auto; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); flex-shrink: 0;" />`)
     }
-    lines.push(`${indent}    <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem;">`)
-    lines.push(`${indent}      <span style="font-size: 1.05rem; font-weight: 700; color: ${colors.text};">✨ ${escapeHtml(heroHeadline)}</span>`)
+    lines.push(`${indent}    <span style="display: flex; flex-direction: column; align-items: flex-start; align-self: flex-start; gap: 0.6rem;">`)
+    lines.push(`${indent}      <span style="font-size: 1rem; font-weight: 700; color: ${colors.text}; white-space: nowrap;">✨ ${escapeHtml(heroHeadline)}</span>`)
     lines.push(`${indent}      <span style="display: inline-block; padding: 0.65rem 1.4rem; border-radius: 8px; background: ${colors.primary}; color: #ffffff; font-weight: 600; font-size: 0.95rem;">${escapeHtml(ctaLabel)} →</span>`)
-    lines.push(`${indent}      <span style="font-size: 0.8rem; color: ${colors.textSecondary};">${escapeHtml(siteUrl.replace(/^https?:\/\//, ''))}</span>`)
+    lines.push(`${indent}      <span style="font-size: 0.8rem; color: ${colors.textSecondary};">${escapeHtml(siteUrl)}</span>`)
     lines.push(`${indent}    </span>`)
+    if (qrCodeDataUri) {
+      // Bottom-right corner: margin-left auto pushes it right, align-self flex-end drops
+      // it to the padding edge, so it clears the border by the same 1.25rem as the
+      // thumbnail opposite. Widths are tuned so it never spills into that padding.
+      lines.push(`${indent}    <img src="${qrCodeDataUri}" alt="${escapeHtml(siteUrl)}" style="width: 124px; height: 124px; margin-left: auto; align-self: flex-end; flex-shrink: 0;" />`)
+    }
     lines.push(`${indent}  </a>`)
   }
 
@@ -183,26 +215,34 @@ export function renderResumeHtml(
     lines.push(`${indent}    ${sectionTitle(resolve(config.labels.sections.contact))}`)
     lines.push(`${indent}    <ul style="list-style: none; padding: 0; margin: 0;">`)
     for (const c of contact) {
+      const slot = iconSlot(c.type in INLINE_ICONS ? c.type : null, colors.primary)
       if (c.href) {
         const linkedinBold = isPdf && c.type === 'linkedin' ? ' font-weight: 600;' : ''
-        lines.push(`${indent}      <li style="margin-bottom: 0.25rem;"><a href="${escapeHtml(c.href)}" style="color: ${colors.primary};${linkedinBold}">${escapeHtml(c.label)}</a></li>`)
+        lines.push(`${indent}      <li style="margin-bottom: 0.25rem;">${slot}<a href="${escapeHtml(c.href)}" style="color: ${colors.primary};${linkedinBold}">${escapeHtml(c.label)}</a></li>`)
       } else {
-        lines.push(`${indent}      <li style="margin-bottom: 0.25rem;">${escapeHtml(c.label)}</li>`)
+        lines.push(`${indent}      <li style="margin-bottom: 0.25rem;">${slot}${escapeHtml(c.label)}</li>`)
       }
     }
     lines.push(`${indent}    </ul>`)
     lines.push(`${indent}  </section>`)
   }
 
-  // Referent
-  if (referent && config.labels.sections.referent) {
+  // Referents
+  if (referents?.length && config.labels.sections.referent) {
     lines.push(`${indent}  <section style="margin-bottom: 1.5rem;">`)
     lines.push(`${indent}    ${sectionTitle(resolve(config.labels.sections.referent))}`)
-    const referentName = referent.href
-      ? `<a href="${escapeHtml(referent.href)}" style="color: ${colors.text}; font-weight: 600; text-decoration: ${isPdf ? 'underline' : 'none'};">${escapeHtml(referent.name)}</a>`
-      : `<span style="font-weight: 600;">${escapeHtml(referent.name)}</span>`
-    lines.push(`${indent}    <p style="margin: 0;">${referentName}</p>`)
-    lines.push(`${indent}    <p style="margin: 0; color: ${colors.textSecondary};">${escapeHtml(resolve(referent.title))}</p>`)
+    referents.forEach((referent, index) => {
+      const referentName = referent.href
+        ? `<a href="${escapeHtml(referent.href)}" style="color: ${colors.text}; font-weight: 600; text-decoration: ${isPdf ? 'underline' : 'none'};">${escapeHtml(referent.name)}</a>`
+        : `<span style="font-weight: 600;">${escapeHtml(referent.name)}</span>`
+      // Space each entry apart from the previous one, so the second name never
+      // butts against the first one's title (both <p> tags have margin: 0).
+      const spacing = index > 0 ? ' margin-top: 0.5rem;' : ''
+      // Icon on the name line only, title left flush underneath, mirroring the sidebar.
+      const slot = iconSlot(referent.href ? 'linkedin' : null, colors.primary)
+      lines.push(`${indent}    <p style="margin: 0;${spacing}">${slot}${referentName}</p>`)
+      lines.push(`${indent}    <p style="margin: 0; color: ${colors.textSecondary};">${escapeHtml(resolve(referent.title))}</p>`)
+    })
     lines.push(`${indent}  </section>`)
   }
 
@@ -235,7 +275,10 @@ export function renderResumeHtml(
     lines.push(`${indent}    ${sectionTitle(resolve(config.labels.sections.experience))}`)
     for (const exp of experiences) {
       lines.push(`${indent}    <article style="margin-bottom: 1.25rem;">`)
-      lines.push(`${indent}      <h3 style="margin: 0 0 0.15rem 0; font-size: 1rem; color: ${colors.text};">${escapeHtml(resolve(exp.role))} — ${escapeHtml(resolve(exp.company))}</h3>`)
+      lines.push(`${indent}      <h3 style="margin: 0 0 0.15rem 0; font-size: 1rem; color: ${colors.text};">${escapeHtml(resolve(exp.role))} - ${escapeHtml(resolve(exp.company))}</h3>`)
+      if (exp.url) {
+        lines.push(`${indent}      <p style="margin: 0 0 0.15rem 0; font-size: 0.9rem;"><a href="${escapeHtml(exp.url)}" style="color: ${colors.primary}; text-decoration: ${isPdf ? 'underline' : 'none'};">${escapeHtml(exp.url)}</a></p>`)
+      }
       const periodText = resolve(exp.period)
       const meta = [isPdf ? reverseDateRange(periodText) : periodText]
       if (exp.type) meta.push(resolve(exp.type))

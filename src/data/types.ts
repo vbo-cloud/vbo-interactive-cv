@@ -37,6 +37,8 @@ export interface Experience {
   id: string
   company: LocalizedString
   role: LocalizedString
+  /** Public URL for the work itself, shown right under the role */
+  url?: string
   type?: LocalizedString
   period: LocalizedString
   description: LocalizedString
@@ -127,7 +129,6 @@ export interface ResumeLabels {
   }
   experience: {
     mainTasks: LocalizedString
-    moreTasks: LocalizedString
     training?: LocalizedString
     technologies: LocalizedString
   }
@@ -170,7 +171,7 @@ export interface ResumeConfig {
   projects?: Project[]
   values?: LocalizedString[]
   hobbies?: Hobby[]
-  referent?: Referent
+  referents?: Referent[]
   pdf?: {
     label?: LocalizedString
     /** Single path for all languages, or one path per language (hides button if no PDF for current language) */

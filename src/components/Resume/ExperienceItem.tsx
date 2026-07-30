@@ -12,6 +12,7 @@ interface ExperienceItemProps {
   company: string
   type?: string
   role: string
+  url?: string
   description: string
   techs: string[]
   expanded: boolean
@@ -23,7 +24,6 @@ interface ExperienceItemProps {
   subItem?: { title: string; description: string }
   labels: {
     mainTasks: string
-    moreTasks: string
     training?: string
     technologies: string
   }
@@ -35,6 +35,7 @@ export function ExperienceItem({
   company,
   type,
   role,
+  url,
   description,
   techs,
   expanded,
@@ -63,17 +64,24 @@ export function ExperienceItem({
       whileHover={isHighlighted ? { scale: 1.02 } : {}}
       transition={{ duration: 0.2 }}
     >
-      <button
-        onClick={handleClick}
-        aria-expanded={details ? expanded : undefined}
-        className="w-full text-left group relative z-10 cursor-pointer"
-      >
+      <div className="w-full text-left group relative">
+        {/* The click surface is an overlay rather than a wrapper around the card:
+            the project link below has to be a real anchor, and nesting one inside
+            a <button> is invalid markup. Hover moves to group-hover accordingly. */}
+        {details && (
+          <button
+            onClick={handleClick}
+            aria-expanded={expanded}
+            aria-label={`${company} - ${role}`}
+            className="absolute inset-0 z-10 cursor-pointer"
+          />
+        )}
         <div
           className={cn(
             'flex items-start gap-4 py-3 rounded-lg px-3 -mx-3 transition-all duration-300',
             isHighlighted
-              ? 'border-2 border-resume-primary/30 bg-resume-primary/5 hover:border-resume-primary/50 hover:shadow-md'
-              : 'hover:bg-resume-primary/5'
+              ? 'border-2 border-resume-primary/30 bg-resume-primary/5 group-hover:border-resume-primary/50 group-hover:shadow-md'
+              : 'group-hover:bg-resume-primary/5'
           )}
         >
           <div className="w-20 flex-shrink-0">
@@ -98,7 +106,19 @@ export function ExperienceItem({
               )}
             </div>
             <p className="text-xs text-resume-text-secondary mt-0.5">{role}</p>
-            <p className="text-xs text-resume-text-secondary/80 mt-1 line-clamp-4">{description}</p>
+            {/* z-20 lifts it above the click overlay, so the anchor wins the click
+                and the card does not toggle underneath it. */}
+            {url && (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-20 inline-block text-xs text-resume-link hover:underline mt-0.5 break-all"
+              >
+                {url}
+              </a>
+            )}
+            <p className="text-xs text-resume-text-secondary/80 mt-1 line-clamp-5">{description}</p>
 
             <div className="flex flex-wrap gap-1.5 mt-2">
               {techs.map((tech) => (
@@ -114,7 +134,7 @@ export function ExperienceItem({
             )}
           </div>
         </div>
-      </button>
+      </div>
 
       {isDesktop && details && (
         <AnimatePresence>
@@ -146,6 +166,16 @@ export function ExperienceItem({
             <div>
               <h2 className="font-semibold text-lg text-resume-text">{company}</h2>
               <p className="text-sm text-resume-primary">{role}</p>
+              {url && (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-resume-link hover:underline break-all"
+                >
+                  {url}
+                </a>
+              )}
               <p className="text-xs text-resume-text-secondary mt-1">{year}</p>
             </div>
           }

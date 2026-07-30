@@ -6,7 +6,6 @@ interface ExperienceDetailsContentProps {
   techs?: string[]
   labels: {
     mainTasks: string
-    moreTasks: string
     training?: string
     technologies: string
   }
@@ -20,8 +19,6 @@ export function ExperienceDetailsContent({
   labels,
   variant,
 }: ExperienceDetailsContentProps) {
-  const MAX_INLINE_TASKS = 6
-
   return (
     <div className="space-y-3">
       {variant === 'modal' && techs && techs.length > 0 && (
@@ -39,17 +36,12 @@ export function ExperienceDetailsContent({
         <div>
           <p className="text-xs font-semibold text-resume-text mb-2">{labels.mainTasks}</p>
           <ul className="text-xs text-resume-text-secondary space-y-1">
-            {(variant === 'inline' ? tasks.slice(0, MAX_INLINE_TASKS) : tasks).map((task, i) => (
+            {tasks.map((task, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-resume-primary">&#8226;</span>
                 <span className="whitespace-pre-line">{task}</span>
               </li>
             ))}
-            {variant === 'inline' && tasks.length > MAX_INLINE_TASKS && (
-              <li className="text-resume-primary italic">
-                +{tasks.length - MAX_INLINE_TASKS} {labels.moreTasks}
-              </li>
-            )}
           </ul>
         </div>
       )}

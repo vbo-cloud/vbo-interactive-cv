@@ -25,7 +25,7 @@ export const resumeConfig: ResumeConfig = {
 
   // ===== SEO (used in <head> meta tags) =====
   seo: {
-    title: 'Vincent Boutin — Cloud Engineer (Azure)',
+    title: 'Vincent Boutin - Cloud Engineer (Azure)',
     description:
       'Interactive resume of Vincent Boutin, Cloud Engineer (Azure), AZ-104 certified, with a background in VR/game development (Unity, Unreal, C#/C++).',
   },
@@ -105,14 +105,14 @@ export const resumeConfig: ResumeConfig = {
   // ===== PROFESSIONAL EXPERIENCES =====
   experiences: [
     {
-      id: 'cloud-ia-training',
-      company: { en: 'Cloud & AI Training', fr: 'Formation Cloud & IA' },
+      id: 'job-finder',
+      company: { en: 'Job Finder', fr: 'Job Finder' },
       role: { en: 'Cloud Engineer (Azure)', fr: 'Cloud Engineer (Azure)' },
-      type: { en: 'Self-training', fr: 'Auto-formation' },
-      period: { en: 'Present - 09/2025', fr: 'Présent - 09/2025' },
+      type: { en: 'Independent project', fr: 'Projet indépendant' },
+      period: { en: '09/2025 - Present', fr: '09/2025 - Présent' },
       description: {
-        en: 'AZ-104 certified (Microsoft Azure Administrator), self-driven training focused on cloud architecture, automation and AI. Flagship project: "Job Finder" — a multi-agent AI pipeline on Azure that automates job offer sourcing and CV matching, built solo end-to-end and documented PR by PR (130+ merged PRs).',
-        fr: 'Certifié AZ-104 (Microsoft Azure Administrator), formation autonome axée sur l\'architecture cloud, l\'automatisation et l\'IA. Projet phare : "Job Finder", un pipeline multi-agents IA sur Azure qui automatise la recherche d\'offres et le matching de CV, construit en solo de bout en bout et documenté PR par PR (130+ PR mergées).',
+        en: 'Design, deployment and day-to-day operation of a complete cloud platform on Azure. Job Finder automates job offer sourcing and profile matching. The platform is publicly available and I keep it running in production.',
+        fr: "Conception, déploiement et exploitation d'une plateforme cloud complète sur Azure. Job Finder automatise la veille d'offres d'emploi et la mise en correspondance avec un profil. La plateforme est accessible publiquement et j'en assure le maintien en condition opérationnelle.",
       },
       techs: [
         'Azure',
@@ -128,25 +128,28 @@ export const resumeConfig: ResumeConfig = {
         'CI/CD',
         'GitHub',
         'Docker',
+        'PostHog',
       ],
       isHighlighted: true,
       details: {
         tasks: {
           en: [
-            'Designed an Azure landing zone (networking, identity, governance) carrying a modular application layer, with reusable Terraform modules (network, compute, data, AI, messaging, monitoring) and remote state',
-            'Built a secretless CI/CD pipeline with GitHub Actions and OIDC federated credentials — zero stored cloud credentials, terraform plan on every PR, apply on merge',
-            'Developed a Python multi-agent pipeline (offer-fetching, cv-analysis, matching, cv-review, cleanup) orchestrated via Azure Service Bus and Container App Jobs, using pgvector (cosine similarity) and Azure OpenAI (GPT-4o-mini + text-embedding-3-small) for semantic matching and scoring',
-            'Built a FastAPI backend (JWT auth via Microsoft Entra External ID) and a Next.js 14 frontend, secured end-to-end with private networking (VNet, private endpoints/DNS), Key Vault, least-privilege RBAC and managed/workload identity',
-            'Set up observability with Application Insights and Log Analytics, KQL-based alerts, and a running PR-by-PR journal documenting every technical decision',
-            'Orchestrated an AI-assisted development workflow: up to 4 Claude Code agents running in parallel for implementation, Claude for architecture and planning discussions, and an autonomous Claude-based reviewer agent integrated into CI/CD for automatic code review on every PR',
+            'Orchestrated an AI-assisted development workflow: two Claude roles with separate permissions (Claude Cowork read-only for design and planning, Claude Code for feature implementation), several Claude Code agents working in parallel, each isolated in its own git worktree, hooks and skills enforcing the project conventions and git workflow, and dedicated subagents for code review, documentation and code exploration',
+            'Designed an Azure landing zone (networking, identity, governance) carrying a modular application layer, with reusable Terraform modules (network, compute, data, AI, messaging, monitoring)',
+            'CI/CD with GitHub Actions: Terraform plan, unit tests and a Claude review on every PR, Terraform apply and Docker image build/push on merge',
+            'Designed a Python multi-agent pipeline (offer-fetching, cv-analysis, matching, cv-review, notifications, cleanup) orchestrated via Azure Service Bus and Container App Jobs',
+            'Semantic matching through embeddings then vector distance (pgvector), CV and job offer analysis with Azure OpenAI',
+            'Designed a FastAPI backend (JWT auth via Microsoft Entra External ID) and a Next.js 14 frontend, secured end-to-end with private networking (VNet, private endpoints/DNS), Key Vault, least-privilege RBAC and managed/workload identity',
+            'Observability with Application Insights, Log Analytics and a Grafana dashboard, Azure Monitor alerts on job failures and Service Bus queues, a monthly Azure budget with alerts, and product analytics through PostHog',
           ],
           fr: [
-            'Conception d\'une landing zone Azure (réseau, identité, gouvernance) portant une couche applicative modulaire, avec des modules Terraform réutilisables (réseau, compute, data, IA, messagerie, monitoring) et un state distant',
-            'Mise en place d\'une CI/CD sans secret avec GitHub Actions et des identités fédérées OIDC — aucune credential cloud stockée, terraform plan à chaque PR, apply au merge',
-            'Développement d\'un pipeline multi-agents Python (collecte d\'offres, analyse de CV, matching, revue de CV, nettoyage) orchestré via Azure Service Bus et des Container App Jobs, avec pgvector (similarité cosinus) et Azure OpenAI (GPT-4o-mini + text-embedding-3-small) pour le matching sémantique et le scoring',
-            'Développement d\'un backend FastAPI (authentification JWT via Microsoft Entra External ID) et d\'un frontend Next.js 14, sécurisés de bout en bout : VNet avec endpoints/DNS privés, Key Vault, RBAC au moindre privilège, identité managée/workload',
-            'Mise en place de l\'observabilité avec Application Insights et Log Analytics, d\'alertes basées sur KQL, et suivi d\'un journal de bord PR par PR documentant chaque décision technique',
-            'Mise en place d\'un workflow de développement assisté par agents IA : jusqu\'à 4 agents Claude Code en simultané pour l\'implémentation, Claude Cowork pour les échanges d\'architecture et de planification, et un agent reviewer Claude autonome intégré en CI/CD pour la revue de code automatique sur chaque PR',
+            "Mise en place d'un workflow de développement assisté par agents IA : deux rôles Claude aux permissions séparées (Claude Cowork en lecture seule pour la conception et la planification, Claude Code pour l'implémentation des features), plusieurs agents Claude Code travaillant en parallèle, chacun isolé sur son propre worktree git, hooks et skills pour faire respecter les conventions et le workflow git, et des subagents dédiés à la revue de code, à la documentation et à l'exploration du code",
+            "Conception d'une landing zone Azure (réseau, identité, gouvernance) portant une couche applicative modulaire, avec des modules Terraform réutilisables (réseau, compute, data, IA, messagerie, monitoring)",
+            "Mise en place d'une CI/CD avec GitHub Actions : Terraform plan, tests unitaires et review Claude à chaque PR, Terraform apply et build/push des images Docker au merge",
+            "Conception d'un pipeline multi-agents Python (collecte d'offres, analyse de CV, matching, revue de CV, notifications, nettoyage) orchestré via Azure Service Bus et des Container App Jobs",
+            "Matching sémantique par embeddings puis distance vectorielle (pgvector), analyse de CV et des offres avec Azure OpenAI",
+            "Conception d'un backend FastAPI (authentification JWT via Microsoft Entra External ID) et d'un frontend Next.js 14, sécurisés de bout en bout : VNet avec endpoints/DNS privés, Key Vault, RBAC au moindre privilège, identité managée/workload",
+            "Observabilité avec Application Insights, Log Analytics et un dashboard Grafana, alertes Azure Monitor sur les échecs de jobs et les files Service Bus, budget mensuel Azure alerté, et analytics produit via PostHog",
           ],
         },
         projectLink: {

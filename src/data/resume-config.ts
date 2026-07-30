@@ -146,8 +146,8 @@ export const resumeConfig: ResumeConfig = {
         tasks: {
           en: [
             'Orchestrated an AI-assisted development workflow: two Claude roles with separate permissions (Claude Cowork read-only for design and planning, Claude Code for feature implementation), several Claude Code agents working in parallel, each isolated in its own git worktree, hooks and skills enforcing the project conventions and git workflow, and dedicated subagents for code review, documentation and code exploration',
-            'Designed an Azure landing zone (networking, identity, governance) carrying a modular application layer, with reusable Terraform modules (network, compute, data, AI, messaging, monitoring)',
             'CI/CD with GitHub Actions: Terraform plan, unit tests and a Claude review on every PR, Terraform apply and Docker image build/push on merge',
+            'Designed an Azure landing zone (networking, identity, governance) carrying a modular application layer, with reusable Terraform modules (network, compute, data, AI, messaging, monitoring)',
             'Designed a Python multi-agent pipeline (offer-fetching, cv-analysis, matching, cv-review, notifications, cleanup) orchestrated via Azure Service Bus and Container App Jobs',
             'Semantic matching through embeddings then vector distance (pgvector), CV and job offer analysis with Azure OpenAI',
             'Designed a FastAPI backend (JWT auth via Microsoft Entra External ID) and a Next.js 14 frontend, secured end-to-end with private networking (VNet, private endpoints/DNS), Key Vault, least-privilege RBAC and managed/workload identity',
@@ -155,8 +155,8 @@ export const resumeConfig: ResumeConfig = {
           ],
           fr: [
             "Mise en place d'un workflow de développement assisté par agents IA : deux rôles Claude aux permissions séparées (Claude Cowork en lecture seule pour la conception et la planification, Claude Code pour l'implémentation des features), plusieurs agents Claude Code travaillant en parallèle, chacun isolé sur son propre worktree git, hooks et skills pour faire respecter les conventions et le workflow git, et des subagents dédiés à la revue de code, à la documentation et à l'exploration du code",
-            "Conception d'une landing zone Azure (réseau, identité, gouvernance) portant une couche applicative modulaire, avec des modules Terraform réutilisables (réseau, compute, data, IA, messagerie, monitoring)",
             "Mise en place d'une CI/CD avec GitHub Actions : Terraform plan, tests unitaires et review Claude à chaque PR, Terraform apply et build/push des images Docker au merge",
+            "Conception d'une landing zone Azure (réseau, identité, gouvernance) portant une couche applicative modulaire, avec des modules Terraform réutilisables (réseau, compute, data, IA, messagerie, monitoring)",
             "Conception d'un pipeline multi-agents Python (collecte d'offres, analyse de CV, matching, revue de CV, notifications, nettoyage) orchestré via Azure Service Bus et des Container App Jobs",
             "Matching sémantique par embeddings puis distance vectorielle (pgvector), analyse de CV et des offres avec Azure OpenAI",
             "Conception d'un backend FastAPI (authentification JWT via Microsoft Entra External ID) et d'un frontend Next.js 14, sécurisés de bout en bout : VNet avec endpoints/DNS privés, Key Vault, RBAC au moindre privilège, identité managée/workload",

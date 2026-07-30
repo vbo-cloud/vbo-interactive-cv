@@ -135,7 +135,6 @@ export const resumeConfig: ResumeConfig = {
         'CI/CD',
         'GitHub',
         'Docker',
-        'PostHog',
       ],
       isHighlighted: true,
       details: {

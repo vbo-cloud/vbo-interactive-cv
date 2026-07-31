@@ -176,20 +176,26 @@ export function renderResumeHtml(
       ? 'Ce CV existe aussi en version interactive'
       : 'This resume also exists as an interactive version'
 
-    lines.push(`${indent}  <a href="${escapeHtml(siteUrl)}" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 1.25rem; border-radius: 14px; background: ${colors.primary}12; border: 1px solid ${colors.primary}40; text-decoration: none;">`)
+    // The QR is taken out of the flex flow and pinned to the corner, with matching
+    // padding reserved for it. As a flex item it could be shoved past the border by a
+    // wide headline, and the printable width is narrower than the CSS page suggests.
+    const qrSize = 110
+    const qrInset = '1.25rem'
+    // Nudged 5px further into the corner than the padding edge. The reserved
+    // padding-right still uses the full inset, so the text only gains clearance.
+    const qrCorner = `calc(${qrInset} - 5px)`
+    lines.push(`${indent}  <a href="${escapeHtml(siteUrl)}" style="position: relative; display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 1.25rem; padding-right: calc(${qrInset} + ${qrSize}px + 1rem); border-radius: 14px; background: ${colors.primary}12; border: 1px solid ${colors.primary}40; text-decoration: none;">`)
     if (previewDataUri) {
-      lines.push(`${indent}    <img src="${previewDataUri}" alt="${escapeHtml(personal.name)} - ${escapeHtml(heroHeadline)}" style="width: 130px; height: auto; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); flex-shrink: 0;" />`)
+      lines.push(`${indent}    <img src="${previewDataUri}" alt="${escapeHtml(personal.name)} - ${escapeHtml(heroHeadline)}" style="width: 100px; height: auto; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); flex-shrink: 0;" />`)
     }
     lines.push(`${indent}    <span style="display: flex; flex-direction: column; align-items: flex-start; align-self: flex-start; gap: 0.6rem;">`)
-    lines.push(`${indent}      <span style="font-size: 1rem; font-weight: 700; color: ${colors.text}; white-space: nowrap;">✨ ${escapeHtml(heroHeadline)}</span>`)
+    // No nowrap: a headline that cannot fit should wrap, not shove the layout apart.
+    lines.push(`${indent}      <span style="font-size: 0.95rem; font-weight: 700; color: ${colors.text};">✨ ${escapeHtml(heroHeadline)}</span>`)
     lines.push(`${indent}      <span style="display: inline-block; padding: 0.65rem 1.4rem; border-radius: 8px; background: ${colors.primary}; color: #ffffff; font-weight: 600; font-size: 0.95rem;">${escapeHtml(ctaLabel)} →</span>`)
     lines.push(`${indent}      <span style="font-size: 0.8rem; color: ${colors.textSecondary};">${escapeHtml(siteUrl)}</span>`)
     lines.push(`${indent}    </span>`)
     if (qrCodeDataUri) {
-      // Bottom-right corner: margin-left auto pushes it right, align-self flex-end drops
-      // it to the padding edge, so it clears the border by the same 1.25rem as the
-      // thumbnail opposite. Widths are tuned so it never spills into that padding.
-      lines.push(`${indent}    <img src="${qrCodeDataUri}" alt="${escapeHtml(siteUrl)}" style="width: 124px; height: 124px; margin-left: auto; align-self: flex-end; flex-shrink: 0;" />`)
+      lines.push(`${indent}    <img src="${qrCodeDataUri}" alt="${escapeHtml(siteUrl)}" style="position: absolute; right: ${qrCorner}; bottom: ${qrCorner}; width: ${qrSize}px; height: ${qrSize}px;" />`)
     }
     lines.push(`${indent}  </a>`)
   }

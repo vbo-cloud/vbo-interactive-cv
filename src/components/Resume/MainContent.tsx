@@ -9,10 +9,11 @@ import { EducationItem } from './EducationItem'
 import { ProfilePhoto } from './ProfilePhoto'
 import { SidebarSection } from './SidebarSection'
 import { ContactItem } from './ContactItem'
+import { ReferentItem } from './ReferentItem'
 
 export function MainContent() {
   const { resolve, resolveArray } = useTranslation()
-  const { personal, contact, experiences, projects, education, labels } = resumeConfig
+  const { personal, contact, referents, experiences, projects, education, labels } = resumeConfig
   const [expandedExp, setExpandedExp] = useState<string | null>(null)
 
   const toggleExp = (id: string) => {
@@ -65,6 +66,22 @@ export function MainContent() {
           ))}
         </div>
       </SidebarSection>
+
+      {/* Referents — mobile only, shown right under Contact; desktop referents live in Sidebar */}
+      {referents?.length && labels.sections.referent ? (
+        <SidebarSection title={resolve(labels.sections.referent)} className="md:hidden">
+          <div className="flex flex-col gap-2">
+            {referents.map((referent) => (
+              <ReferentItem
+                key={referent.name}
+                name={referent.name}
+                title={resolve(referent.title)}
+                href={referent.href}
+              />
+            ))}
+          </div>
+        </SidebarSection>
+      ) : null}
 
       {/* Experiences */}
       <div className="relative">
